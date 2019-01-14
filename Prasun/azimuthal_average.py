@@ -23,12 +23,13 @@ location = (49,49)
 field = numpy.zeros((size[0]+2,size[1]+2))
 NField = field.size
 
+'''
 for ii in range (size[0]+2):
     for jj in range (size[1]+2):
 
         field[ii][jj] = random.randint(0,3)
-    
-NN = 400
+'''    
+NN = 1000
 t0 = time.time()
     
 for ii in range (NN):
@@ -38,25 +39,26 @@ for ii in range (NN):
     field[location[0]+1,location[1]+0] += 3
     field[location[0]+1,location[1]+2] += 3
     field[location[0]+2,location[1]+1] += 3
-'''
+    '''
     #print
-while numpy.max(field) >= max_height:
+    field[location[0]+1,location[1]+1] += 1
+    while numpy.max(field) >= max_height:
     
-    highest = numpy.argmax(field.reshape(1,field.size))
+        highest = numpy.argmax(field.reshape(1,field.size))
     
-    x = int(int(highest) / int(field.shape[0]))
-    y = int(int(highest) % int(field.shape[0]))
-    
-    field[x,y] -= 4
-    field[x-1,y] += 1
-    field[x+1,y] += 1
-    field[x,y-1] += 1
-    field[x,y+1] += 1
+        x = int(int(highest) / int(field.shape[0]))
+        y = int(int(highest) % int(field.shape[0]))
         
-    field[0,:] = 0
-    field[:,0] = 0
-    field[size[0]+1,:] = 0
-    field[:,size[1]+1] = 0
+        field[x,y] -= 4
+        field[x-1,y] += 1
+        field[x+1,y] += 1
+        field[x,y-1] += 1
+        field[x,y+1] += 1
+        
+        field[0,:] = 0
+        field[:,0] = 0
+        field[size[0]+1,:] = 0
+        field[:,size[1]+1] = 0
         
       
     

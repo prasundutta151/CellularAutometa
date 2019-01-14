@@ -23,11 +23,12 @@ location = (49,49)
 field = numpy.zeros((size[0]+2,size[1]+2))
 NField = field.size
 
+'''
 for ii in range (size[0]+2):
     for jj in range (size[1]+2):
 
         field[ii][jj] = random.randint(0,3)
-    
+''' 
 NN = 400
 t0 = time.time()
     
@@ -63,6 +64,7 @@ while numpy.max(field) >= max_height:
 fieldP = numpy.copy(field[1:size[0], 1:size[1]])
 #print (fieldP)
 
+# Power spectrum calculation starts here
 fourier = []
 fourier.append(numpy.fft.fft2(fieldP))
 #print (fourier)
@@ -74,7 +76,9 @@ power_spectrum = numpy.array(power_spectrum[0][0])
 power_spectrum = numpy.fft.fftshift(power_spectrum)
 power_spectrum = numpy.array(power_spectrum)
 print (power_spectrum)
+
 def azimuthal_average(plot):
+    
     x, y = numpy.indices(plot.shape)
     
     center = numpy.array([(x.max()-x.min())/2.0, (y.max()-y.min())/2.0])
@@ -116,7 +120,7 @@ a_average = numpy.array(a_average)
 #plt.colorbar()
 #figname2 = "fourier.png" % (ii)
 #plt.savefig(figname2)
-'''
+
 plt.clf()
 plt.ion()
 plt.figure(figsize=(size[0],size[1]), dpi= 20.0, frameon= False)
@@ -134,6 +138,5 @@ plt.colorbar()
 figname4 = "azimuthal_average.png"
 plt.savefig(figname4)
 plt.show()
-'''
 
 plt.plot(a_average)
